@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.allHeader();
+    console.log(this.sharedService.getCookie());
   }
 
   allHeader() {

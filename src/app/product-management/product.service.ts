@@ -30,6 +30,11 @@ export class ProductService {
     const url: string = this.serviceUrl + categoryUrl + proId;
     return this.httpClient.get<Product>(url, {withCredentials: true});
   }
+  addToCartTest(prod) {
+    const categoryUrl = 'cart';
+    const url: string = this.serviceUrl + categoryUrl;
+    return this.httpClient.post<Product>(url, prod);
+  }
   reduceToCart(proId) {
     const categoryUrl = 'reduce/';
     const url: string = this.serviceUrl + categoryUrl + proId;
@@ -50,4 +55,4 @@ export class ProductService {
     const url: string = this.serviceUrl + categoryUrl + id;
     return this.httpClient.get<Product>(url);
   }
-}
+  }

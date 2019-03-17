@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddSeoComponent } from './seo/add-seo/add-seo.component';
 import { PageNotFountComponent } from './shared/page-not-fount/page-not-fount.component';
+
 const routes: Routes = [{
   path: 'seo', component: AddSeoComponent,
   data: {
@@ -22,6 +23,10 @@ const routes: Routes = [{
 {
   path: 'shared',
   loadChildren: './shared/shared.module#SharedModule'
+},
+{
+  path: 'account',
+  loadChildren: './account/account.module#AccountModule'
 },
 {
   path: '',

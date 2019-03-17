@@ -4,6 +4,7 @@ import { ProductService } from './../product.service';
 import { Product } from '../../shared/model/product.model';
 import { Observable,  } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { Cart } from './../../shared/model/cart.model';
 
 @Component({
   selector: 'app-product-list',
@@ -13,6 +14,7 @@ import { switchMap } from 'rxjs/operators';
 export class ProductListComponent implements OnInit {
   productModel: Product;
   cartModel: Product;
+  cart: Cart;
   productModel$: Observable<string>;
   catid: string;
   isConsented = false;
@@ -37,8 +39,11 @@ export class ProductListComponent implements OnInit {
       console.log(err);
     });
   }
-  addToCart(proId) {
-    this.productService.addToCart(proId).subscribe(data => {
+  addToCartTest(product) {
+    this.cart = new Cart();
+    this.cart.user  = 'admin';
+    this.cart.items = product;
+    this.productService.addToCartTest(this.cart).subscribe(data => {
       this.cartModel = data;
       localStorage.setItem('cart', JSON.stringify(data));
     }, err => {

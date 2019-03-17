@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders,  } from '@angular/common/http';
+import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { AppSetting } from '../config/appSetting';
@@ -37,7 +37,25 @@ export class SharedService {
     return this.httpClient.get<Footer>(url);
   }
   addToCart() {
-   return JSON.parse(localStorage.getItem('cart'));
+    if (this.getCookie() !== '') {
+      return JSON.parse(localStorage.getItem('cart'));
+    } else {
+
+    }
   }
+  getCookie() {
+    const ca: Array<string> = document.cookie.split(';');
+    const caLen: number = ca.length;
+    const cookieName = `${'USER_DETAILS'}=`;
+    let c: string;
+    for (let i = 0; i < caLen; i += 1) {
+      c = ca[i].replace(/^\s+/g, '');
+      if (c.indexOf(cookieName) === 0) {
+        return c.substring(cookieName.length, c.length);
+      }
+    }
+    return '';
+  }
+
 }
 
