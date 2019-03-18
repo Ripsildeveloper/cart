@@ -30,7 +30,7 @@ export class SigninComponent implements OnInit {
 
   setCookie(value) {
     const d: Date = new Date();
-    d.setTime(d.getTime() + 356 * 24 * 60 * 60 * 1000);
+    d.setTime(d.getTime() + 700 * 24 * 60 * 60 * 1000);
     const expires = `expires=${d.toUTCString()}`;
     const cpath: string = 'cookie' ? `; path=${'cookie'}` : '';
     document.cookie = `${'USER_DETAILS'}=${value}; ${expires}${cpath}`;
@@ -41,12 +41,14 @@ export class SigninComponent implements OnInit {
     this.signInModel.userName = this.signInForm.controls.userName.value;
     this.signInModel.password = this.signInForm.controls.password.value;
     this.accountService.signIn(this.signInModel).subscribe(data => {
-      this.setCookie('');
       if (data.length === 0) {
        this.pwdError = true;
+       /* this.setCookie('false'); */
+       localStorage.setItem('login', 'false');
       } else if (data.length !== 0) {
         this.router.navigate(['account/alert']);
-        this.setCookie(data[0].userName);
+        /* this.setCookie(data[0]._id); */
+        localStorage.setItem('login', 'true');
       }
     });
   }

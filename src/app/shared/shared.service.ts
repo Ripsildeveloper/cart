@@ -36,13 +36,26 @@ export class SharedService {
     const url: string = this.serviceUrl + categoryUrl;
     return this.httpClient.get<Footer>(url);
   }
-  addToCart() {
+  /* addToCart() {
     if (this.getCookie() !== '') {
       return JSON.parse(localStorage.getItem('cart'));
     } else {
 
     }
+  } */
+
+  addToCart() {
+    if (localStorage.getItem('login') !== 'true')      {
+      let sum = 0;
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.map(item => {
+        sum += item.qty;
+      });
+      return sum;
+  } else {
   }
+
+}
   getCookie() {
     const ca: Array<string> = document.cookie.split(';');
     const caLen: number = ca.length;

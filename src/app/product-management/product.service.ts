@@ -55,4 +55,17 @@ export class ProductService {
     const url: string = this.serviceUrl + categoryUrl + id;
     return this.httpClient.get<Product>(url);
   }
+  getCookie() {
+    const ca: Array<string> = document.cookie.split(';');
+    const caLen: number = ca.length;
+    const cookieName = `${'USER_DETAILS'}=`;
+    let c: string;
+    for (let i = 0; i < caLen; i += 1) {
+      c = ca[i].replace(/^\s+/g, '');
+      if (c.indexOf(cookieName) === 0) {
+        return c.substring(cookieName.length, c.length);
+      }
+    }
+    return '';
+  }
   }
